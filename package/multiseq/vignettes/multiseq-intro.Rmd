@@ -90,11 +90,11 @@ Function `multiseq` takes as input `x`, an `nsig` by `n`  matrix (or a one-dimen
     lines(exp(res6$baseline.mean), col="blue")
     title("estimated signal (6 samples)",line=-1)
 ```
-In the Figure above we plotted the underlying signal in red, the simulated data in black circles, and the estimated baseline mean in dark green with the light green curves reporting the baseline mean +/- 2 times the posterior standard errors.
+In the Figure above we plotted the underlying signal in red, the simulated data in black circles, and the estimated baseline mean in dark green (with the light green curves reporting the baseline mean +/- 2 times the posterior standard errors- not yet).
 
 Also we used function `multiseq` to estimate the mean baseline using multiple (6) which we plotted in blue, which gave us a more accurate estimate of the underlying signal, as expected.
 
-Below we will apply function `multiseq` to real data, namely RNA-Sequencing data from an experiment on `nsig`=69 lymphoblastoid cell lines derived from unrelated Nigerian individuals (Pickrell et al., Nature 464, 768-772, 2010). We selected a genomic region of size `n`=4096 where a SNP (rs10774671) was identified to be associated with a differential expression pattern. Our input matrix is a 66 x 4096 matrix of counts where each element of the matrix is the number of sequenced reads per individual whose start was mapped to each of the 4096 genomic base in each of the individuals. We will apply `multiseq` to estimate the baseline in each genotype group (first three panles in the Figure below) and to estimate an effect give the covariate `g` specifying thw allele at the SNP location in each individual (last panel in Figure below).
+Below we will apply function `multiseq` to real data, namely RNA-Sequencing data from an experiment on `nsig`=69 lymphoblastoid cell lines derived from unrelated Nigerian individuals (Pickrell et al., Nature 464, 768-772, 2010). We selected a genomic region of size `n`=4096 where a SNP (rs10774671) was identified to be associated with a differential expression pattern. Our input matrix is a 66 x 4096 matrix of counts where each element of the matrix is the number of sequenced reads per individual whose start was mapped to each of the 4096 genomic base in each of the individuals. We will apply `multiseq` to estimate the baseline in each genotype group (first three panles in the Figure below) and to estimate an effect give the covariate `g` specifying the allele at the SNP location in each individual (last panel in Figure below).
 
 ```{r OAS1}
     data(OAS1, package="multiseq")
@@ -123,7 +123,7 @@ Below we will apply function `multiseq` to real data, namely RNA-Sequencing data
     plot(transcripts, OAS1$region)
 ```
 
-Notice the use of argument `minobs` in function `multiseq` (type `?multiseq` to see a complete list of possible arguments) which can be used to specifies the minimum number of observations ...required to be .. in each logistic model.
+Notice the use of argument `minobs` in function `multiseq` (type `?multiseq` to see a complete list of possible arguments) which can be used to specify the minimum number of observations ...required to be .. in each logistic model.
 You can use function `get.intervals` to print the intervals where `multiseq` found peaks or effects at a specified threshold. Type `?get.intervals` for more details. 
 
 ```{r plot}
@@ -136,7 +136,7 @@ Extract sequencing data with function `get.counts`
 
 In the second part of the previous section we applied `multiseq` to sequencing data that had already been loaded into a matrix. Special tools are required to handle next generation sequencing data because of their high throughput nature, and in this section we will show how function `get.counts` can be used to load data in a variety of formats used for sequencing data.
 
-Function `get.counts` extracts data in *bam*, *bigWig*, or *hdf5* format using `samtools`, the *UCSC tools*, or the **R** package **rhdf5**, respectively, and puts them into a matrix that can be feeded as input to `multiseq`. Function `get.counts` requires as input a samplesheet in the following format:
+Function `get.counts` extracts data in *bam*, *bigWig*, or *hdf5* format using `samtools`, the *UCSC tools*, or the **R** package **rhdf5**, respectively, and puts them into a matrix that can be fed as input to `multiseq`. Function `get.counts` requires as input a samplesheet in the following format:
 
     SampleID Type bedPath ReadDepth bigWigPath
     A1 Control peakA1.bb 16335812 A1.bw
